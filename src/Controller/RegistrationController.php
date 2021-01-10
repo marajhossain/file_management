@@ -39,10 +39,12 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    /*$form->get('plainPassword')->getData()*/
+                    $form->get('password')->getData()
                 )
             );
             $user->setIsVerified(true);
+            $user->setApplicationToken(bin2hex(random_bytes(60)));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -22,6 +23,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Assert\NotBlank
      */
     private $email;
 
@@ -40,6 +43,25 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     *
+     * @Assert\NotBlank
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     *
+     * @Assert\NotBlank
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $application_token;
 
     public function getId(): ?int
     {
@@ -134,5 +156,41 @@ class User implements UserInterface
     public function getIsVerified(): ?bool
     {
         return $this->is_verified;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getApplicationToken(): ?string
+    {
+        return $this->application_token;
+    }
+
+    public function setApplicationToken(string $application_token): self
+    {
+        $this->application_token = $application_token;
+
+        return $this;
     }
 }
