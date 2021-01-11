@@ -1,0 +1,45 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Form {% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Job List
+            <a href="{{ path('form_new') }}" class="btn btn-default btn-warning pull-right "> <i class="fa fa-plus"></i> Create new</a>
+        </h1>
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead class="bg-success">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for form in forms %}
+            <tr>
+                <td>{{ form.id }}</td>
+                <td>{{ form.title }}</td>
+                <td>{{ getStatus[form.status] }}</td>
+                <td>
+                    <a href="{{ path('form_show', {'id': form.id}) }}" class="text-info"> <i class="fa fa-eye"></i> show</a> |
+                    <a href="{{ path('form_edit', {'id': form.id}) }}" class="text-warning"> <i class="fa fa-edit"></i> edit</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        | <a href="{{ path('form_edit', {'id': form.id}) }}" class="text-danger"> <i class="fa fa-trash"></i> delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -34,6 +34,17 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
             <![endif]-->
         {% endblock %}
+        <style>
+            .form-error-message{
+                color: red;
+                font-size: x-small;
+            }
+            .form-error-icon{
+                color: white;
+                font-size: x-small;
+                background-color: red;
+            }
+        </style>
     </head>
     <body>
 
@@ -80,8 +91,8 @@
                                 <a {% if app.request.attributes.get( '_route' ) starts with 'user_index' %} class="active" {% else %} class="nav-link" {% endif %}  href="{{ path("user_index") }}"><i class="fa fa-users fa-fw"></i> User</a>
                             </li>#}
                             <li>
-                                {#<a {% if app.request.attributes.get( '_route' ) starts with 'category_index' %} class="active" {% else %} class="nav-link" {% endif %}  href="{{ path("category_index") }}"><i class="fa fa-sitemap fa-fw"></i> Category</a>#}
-                                <a href="#" ><i class="fa fa-sitemap fa-fw"></i> Form </a>
+                                <a {% if app.request.attributes.get( '_route' ) starts with 'form_index' %} class="active" {% else %} class="nav-link" {% endif %}  href="{{ path("form_index") }}"><i class="fa fa-sitemap fa-fw"></i> Form</a>
+                                {#<a href="#" ><i class="fa fa-sitemap fa-fw"></i> Form </a>#}
                             </li>
                         </ul>
                     </div>

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form{% endblock %}
+
+{% block body %}
+    <h1>Form</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ form.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ form.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ form.description }}</td>
+            </tr>
+            <tr>
+                <th>Form_token</th>
+                <td>{{ form.formToken }}</td>
+            </tr>
+            <tr>
+                <th>Thumbnail_image</th>
+                <td>{{ form.thumbnailImage }}</td>
+            </tr>
+            <tr>
+                <th>Attachment</th>
+                <td>{{ form.attachment }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ form.status }}</td>
+            </tr>
+            <tr>
+                <th>Created_by</th>
+                <td>{{ form.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Created_time</th>
+                <td>{{ form.createdTime }}</td>
+            </tr>
+            <tr>
+                <th>Updated_by</th>
+                <td>{{ form.updatedBy }}</td>
+            </tr>
+            <tr>
+                <th>Updated_time</th>
+                <td>{{ form.updatedTime }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('form_index') }}">back to list</a>
+
+    <a href="{{ path('form_edit', {'id': form.id}) }}">edit</a>
+
+    {{ include('form/_delete_form.html.twig') }}
+{% endblock %}
