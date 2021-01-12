@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
+
 
 class HomeController extends AbstractController
 {
@@ -30,8 +32,24 @@ class HomeController extends AbstractController
      */
     public function formView(Request $request): Response
     {
+        // return $this->json(['id' => bin2hex(random_bytes(5))]);
         return $this->json(['id' => $request->get('id')]);
     }
+
+    // /**
+    //  * @Route("/pdf")
+    //  */
+    // public function imageAction(Knp\Snappy\Pdf $knpSnappyPdf)
+    // {
+    //     $html = $this->renderView('MyBundle:Foo:bar.html.twig', array(
+    //         'some'  => $vars
+    //     ));
+
+    //     return new JpegResponse(
+    //         $knpSnappyImage->getOutputFromHtml($html),
+    //         'image.jpg'
+    //     );
+    // }
 
     /**
      * @Route("/email")

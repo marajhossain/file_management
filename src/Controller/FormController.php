@@ -100,6 +100,7 @@ class FormController extends AbstractController
         return $this->render('form/new.html.twig', [
             'form' => $formEntity,
             'form' => $form->createView(),
+            'questions' => $this->systemConfigHelper->getQuestion(1),
         ]);
     }
 

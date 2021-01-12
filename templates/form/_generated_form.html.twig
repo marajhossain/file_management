@@ -1,0 +1,25 @@
+<div class="col-lg-12">
+    <table class="table table-hover table-bordered">
+        <thead class="bg-success">
+            <tr>
+                <th>#</th>
+                <th>Particulars</th>
+                <th>Yes/No</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ question }}</td>
+                <td>
+                    <input type="radio" name="answer[]" value="{{ loop.index }}" />
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn btn-warning ">Download EIA Form</button>
+    <button class="btn btn-success pull-right">Save EIA Form</button>
+    
+</div>

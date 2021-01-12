@@ -3,11 +3,45 @@
 {% block title %}New Form{% endblock %}
 
 {% block body %}
+
     <div class="col-lg-12">
         <h1 class="page-header">Create new form</h1>
     </div>
 
-    {{ include('form/_form.html.twig') }}
-
+    {{ include('form/_generated_form.html.twig') }}
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Upload hard copy EIA form</h1>
+        </div>
+        <div class="col-md-4">
+            <form class="" action="" method="post" enctype="multipart/form-data">
+                <table class="">
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="form-group">
+                                    <label for="job_post_logo">Upload file</label>
+                                    <div class="custom-file">
+                                        <input type="file" id="job_post_logo" name="job_post[logo]" class="custom-file-input">
+                                        <label for="job_post_logo" class="custom-file-label"></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-success pull-right">Upload EIA Form</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br />
     <a href="{{ path('form_index') }}" class="text-danger"> <i class="fa fa-arrow-left"></i> back to list</a>
+    {# {{ include('form/_form.html.twig') }} #}
+
+    
 {% endblock %}
