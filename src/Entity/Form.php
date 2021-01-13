@@ -19,6 +19,13 @@ class Form
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=20)
+     *
+     * @Assert\NotBlank
+     */
+    private $form_submit_type;
+
+    /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank
@@ -36,14 +43,24 @@ class Form
     private $form_token;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $thumbnail_image;
+    private $question_form_id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $question_answer;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $attachment;
+    private $payment_slip_attachment;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $eia_form_attachment;
 
     /**
      * @ORM\Column(type="smallint")
@@ -73,6 +90,18 @@ class Form
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFormSubmitType(): ?string
+    {
+        return $this->form_submit_type;
+    }
+
+    public function setFormSubmitType(string $form_submit_type): self
+    {
+        $this->form_submit_type = $form_submit_type;
+
+        return $this;
     }
 
     public function getTitle(): ?string
@@ -111,26 +140,50 @@ class Form
         return $this;
     }
 
-    public function getThumbnailImage(): ?string
+    public function getQuestionFormId(): ?int
     {
-        return $this->thumbnail_image;
+        return $this->question_form_id;
     }
 
-    public function setThumbnailImage(?string $thumbnail_image): self
+    public function setQuestionFormId(int $question_form_id): self
     {
-        $this->thumbnail_image = $thumbnail_image;
+        $this->question_form_id = $question_form_id;
 
         return $this;
     }
 
-    public function getAttachment(): ?string
+    public function getQuestionAnswer(): ?string
     {
-        return $this->attachment;
+        return $this->question_answer;
     }
 
-    public function setAttachment(?string $attachment): self
+    public function setQuestionAnswer(string $question_answer): self
     {
-        $this->attachment = $attachment;
+        $this->question_answer = $question_answer;
+
+        return $this;
+    }
+
+    public function getPaymentSlipAttachment(): ?string
+    {
+        return $this->payment_slip_attachment;
+    }
+
+    public function setPaymentSlipAttachment(?string $payment_slip_attachment): self
+    {
+        $this->payment_slip_attachment = $payment_slip_attachment;
+
+        return $this;
+    }
+
+    public function getEiaFormAttachment(): ?string
+    {
+        return $this->eia_form_attachment;
+    }
+
+    public function setEiaFormAttachment(?string $eia_form_attachment): self
+    {
+        $this->eia_form_attachment = $eia_form_attachment;
 
         return $this;
     }
@@ -194,4 +247,6 @@ class Form
 
         return $this;
     }
+
+    
 }
