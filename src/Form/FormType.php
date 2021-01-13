@@ -28,8 +28,8 @@ class FormType extends AbstractType
                 'required' => true,
             ])
             ->add('description')
-            ->add('thumbnail_image', FileType::class, [
-                // unmapped means that this field is not associated to any entity property
+            ->add('form_submit_type')
+            ->add('payment_slip_attachment', FileType::class, [
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -38,13 +38,14 @@ class FormType extends AbstractType
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
+                            'application/pdf',
+                            'application/x-pdf',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid Image',
+                        'mimeTypesMessage' => 'Please upload a valid Image or Pdf',
                     ])
                 ],
             ])
-            ->add('attachment', FileType::class, [
-                // unmapped means that this field is not associated to any entity property
+            ->add('eia_form_attachment', FileType::class, [
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

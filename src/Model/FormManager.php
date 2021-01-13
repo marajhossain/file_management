@@ -26,6 +26,12 @@ class FormManager extends AbstractController{
         return $this->formRepository->findAll();
     }
 
+    public function getFormByToken($token): object
+    {
+        $return = $this->formRepository->findOneBy(['form_token' => $token]);
+        return $return?$return:(object) null;
+    }
+
     public function create(Form $form)
     {
         $this->em->persist($form);

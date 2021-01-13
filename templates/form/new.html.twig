@@ -3,57 +3,30 @@
 {% block title %}New Form{% endblock %}
 
 {% block body %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
 
     <div class="col-lg-12">
-        <h1 class="page-header">Create new form</h1>
+        <h1 class="page-header">EIA form submit (soft copy)</h1>
+    </div>
+    <div class="col-lg-12">
+        {{ include('form/_form_generated.html.twig') }}
+        <div class="form-group">
+            <button class="btn btn-success pull-right">Submit EIA Form</button>
+            <label for="form_payment_slip_attachment">Upload Payment Slip <small class="text-danger">(Maximum file size 1 MB)</small></label>
+            <div class="custom-file">
+                <input type="file" id="form_payment_slip_attachment" name="form[payment_slip_attachment]" class="custom-file-input">
+                <label for="payment_slip_attachment" class="custom-file-label"></label>
+            </div>
+        </div>
     </div>
 
-    {{ include('form/_generated_form.html.twig') }}
-    
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Upload hard copy EIA form
-                <a href="{{ path('form_new') }}" class="btn btn-default btn-warning pull-right "> <i class="fa fa-download"></i> Download EIA Form</a>
-            </h1>
-        </div>
-        <div class="col-md-12">
-            <form class="" action="" method="post" enctype="multipart/form-data">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div class="form-group">
-                                    <label for="job_post_logo">Upload EIA form/file <small class="text-danger">(Maximum file size 1 MB)</small></label>
-                                    <div class="custom-file">
-                                        <input type="file" id="job_post_logo" name="job_post[logo]" class="custom-file-input">
-                                        <label for="job_post_logo" class="custom-file-label"></label>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <label for="job_post_logo">Upload Payment Slip <small class="text-danger">(Maximum file size 1 MB)</small></label>
-                                    <div class="custom-file">
-                                        <input type="file" id="job_post_logo" name="job_post[logo]" class="custom-file-input">
-                                        <label for="job_post_logo" class="custom-file-label"></label>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-success pull-right">Upload EIA Form</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </div>
-    </div>
+    {{ include('form/_form_upload.html.twig') }}
+
     <div class="clearfix"></div>
     <br />
     <a href="{{ path('form_index') }}" class="text-danger"> <i class="fa fa-arrow-left"></i> back to list</a>
-    {# {{ include('form/_form.html.twig') }} #}
-
+     {#{{ include('form/_form.html.twig') }}#}
     
 {% endblock %}

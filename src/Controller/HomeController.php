@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\DependencyInjection\SystemConfigHelper;
+use App\Model\FormManager;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +17,22 @@ use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
 
 class HomeController extends AbstractController
 {
+    private $systemConfigHelper;
+    private $formManager;
+    private $uploadDir;
+
+    /**
+     * @param FormManager $formManager
+     * @param $uploadDir
+     */
+    public function __construct(
+        FormManager $formManager,
+        $uploadDir
+    ) {
+        $this->systemConfigHelper = new SystemConfigHelper();
+        $this->formManager = $formManager;
+        $this->uploadDir = $uploadDir;
+    }
     /**
      * @Route("/home", name="home_index")
      */
@@ -32,24 +52,44 @@ class HomeController extends AbstractController
      */
     public function formView(Request $request): Response
     {
-        // return $this->json(['id' => bin2hex(random_bytes(5))]);
-        return $this->json(['id' => $request->get('id')]);
+        $form = $this->formManager->getFormByToken($request->get("id"));
+        return $this->render('home/_form_generated.html.twig', [
+            'questions' => $this->systemConfigHelper->getQuestion(1),
+            'form' => $form,
+            'answer' => json_decode($form->getQuestionAnswer(), true),
+            'formSubmitType' => $form->getFormSubmitType(),
+            'eiaFromAttachment' => $form->getEiaFormAttachment(),
+            'paymentSlipAttachment' => $form->getPaymentSlipAttachment()
+        ]);
     }
 
-    // /**
-    //  * @Route("/pdf")
-    //  */
-    // public function imageAction(Knp\Snappy\Pdf $knpSnappyPdf)
-    // {
-    //     $html = $this->renderView('MyBundle:Foo:bar.html.twig', array(
-    //         'some'  => $vars
-    //     ));
+     /**
+      * @Route("/pdf")
+      */
+    public function generate_pdf(){
 
-    //     return new JpegResponse(
-    //         $knpSnappyImage->getOutputFromHtml($html),
-    //         'image.jpg'
-    //     );
-    // }
+        $options = new Options();
+        $options->set('defaultFont', 'Roboto');
+
+
+        $dompdf = new Dompdf($options);
+
+        $data = array(
+            'headline' => 'my headline'
+        );
+        $html = $this->renderView('form/_form_generated.html.twig', [
+            'headline' => "Test pdf generator",
+            'questions' => $this->systemConfigHelper->getQuestion(1)
+        ]);
+
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("testpdf.pdf", [
+            "Attachment" => true
+        ]);
+    }
 
     /**
      * @Route("/email")

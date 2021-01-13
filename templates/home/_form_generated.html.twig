@@ -1,0 +1,78 @@
+<h1 class="page-header">EIA Form </h1>
+<div>
+    {% if formSubmitType == 'FORM' %}
+        <table class="table-dev">
+            <thead class="bg-success">
+            <tr>
+                <th>#</th>
+                <th>Particulars</th>
+                <th>Yes/No</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ question }}</td>
+                    <td class="text-center">
+                        <input type="radio" {% if answer[loop.index] %} checked="checked" {% endif %} disabled />
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% elseif formSubmitType == 'UPLOAD'  %}
+        <table class="table-dev">
+            <thead>
+            <tr>
+                <th>EIA From (Attachment)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <img class="img" src="{{ asset("public/uploads/#{eiaFromAttachment}") }}" alt="" style="width: 300px" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    {% else %}
+
+    {% endif %}
+
+
+    <h3>Attachment</h3>
+    <hr />
+    <table class="table-dev">
+        <thead>
+            <tr>
+                <th>Payment Slip</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img class="img" src="{{ asset("public/uploads/#{paymentSlipAttachment}") }}" alt="" style="width: 300px" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<style>
+    .table-dev{
+        border-collapse: collapse;
+    }
+    .table-dev thead{
+        background-color: gray;
+        color: white;
+    }
+    .table-dev tr th, td{
+        border: 1px solid black;
+        padding: 5px;
+    }
+    .table-dev .text-center{
+        text-align: center;
+    }
+</style>

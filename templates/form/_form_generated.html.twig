@@ -1,0 +1,41 @@
+<form class="" action="{{ path('form_new') }}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="form_submit_type" value="FORM" />
+    <input type="hidden" name="question_form_id" value="1" />
+    <table class="table table-hover table-bordered table-dev">
+        <thead class="bg-success">
+        <tr>
+            <th>#</th>
+            <th>Particulars</th>
+            <th>Yes/No</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ question }}</td>
+                <td class="text-center">
+                    <input type="radio" name="answers[]" id="answer_{{ loop.index }}" value="{{ loop.index }}"  />
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</form>
+<style>
+    .table-dev{
+        border-collapse: collapse;
+    }
+    .table-dev thead{
+        background-color: gray;
+        color: white;
+    }
+    .table-dev tr th, td{
+        border: 1px solid black;
+        padding: 5px;
+    }
+    .table-dev .text-center{
+        text-align: center;
+    }
+</style>

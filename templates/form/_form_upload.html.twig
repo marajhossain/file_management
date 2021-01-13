@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Or EIA form upload hard copy
+            <a href="{{ path('form_download', {'id': 1}) }}" class="btn btn-default btn-warning pull-right "> <i class="fa fa-download"></i> Download EIA Form</a>
+        </h1>
+    </div>
+    <div class="col-md-12">
+        <form class="" action="{{ path('form_new') }}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="form_submit_type" value="UPLOAD" />
+            <input type="hidden" name="question_form_id" value="1" />
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="form-group">
+                            <label for="job_post_logo">Upload EIA form/file <small class="text-danger">(Maximum file size 1 MB)</small></label>
+                            <div class="custom-file">
+                                <input type="file" id="form_eia_form_attachment" name="form[eia_form_attachment]" class="custom-file-input">
+                                <label for="job_post_logo" class="custom-file-label"></label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label for="job_post_logo">Upload Payment Slip <small class="text-danger">(Maximum file size 1 MB)</small></label>
+                            <div class="custom-file">
+                                <input type="file" id="form_payment_slip_attachment" name="form[payment_slip_attachment]" class="custom-file-input">
+                                <label for="job_post_logo" class="custom-file-label"></label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-success pull-right">Upload EIA Form</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
